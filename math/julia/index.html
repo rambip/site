@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=0.7">
+		<link rel="stylesheet" href="/style.css?1500">
+		<title>julia</title>
+	</head>
+	<body>
+		<div class="doc">
+			<button class="info" id="info" style="display: none;"></button>
+			<div class="explanation">
+				<p data-line="0" class="code-line code-line">Cette page montre l’ensemble de Mandelbrot à gauche, et trace des ensembles de Julia à droite</p>
+<h1 data-line="2" class="code-line code-line">Julia</h1>
+<p data-line="3" class="code-line code-line">Un <a href="https://fr.wikipedia.org/wiki/Ensemble_de_Julia" data-href="https://fr.wikipedia.org/wiki/Ensemble_de_Julia" title="https://fr.wikipedia.org/wiki/Ensemble_de_Julia">ensemble de Julia</a> est une construction mathématique assez simple, mais qui cache une complexité sans fin.</p>
+<p data-line="5" class="code-line code-line">Le seul problème c’est que pour le construire, il faut se servir des <a href="https://fr.wikipedia.org/wiki/Nombre_complexe" data-href="https://fr.wikipedia.org/wiki/Nombre_complexe" title="https://fr.wikipedia.org/wiki/Nombre_complexe">nombres complexes</a> 😕</p>
+<p data-line="7" class="code-line code-line">Ce sont des nombres un peu étranges, avec une partie réelle et une partie imaginaire. La partie imaginaire est créée à partir de <em>i</em>, qui est la racine de -1<br></p>
+<p data-line="9" class="code-line code-line">Ces nombres peuvent paraitre bizzare, mais comme tous les nombres, ont peut les additioner, les multiplier …</p>
+<p data-line="11" class="code-line code-line">Pour construire un ensemble de Julia, c’est très simple:
+choisissez d’abord un nombre complexe C.</p>
+<p data-line="14" class="code-line code-line">Ensuite, regardez ce programme suivant :</p>
+<pre><code data-line="16" class="code-line code-line"><code><div>  On part d’un nombre complexe.
+
+- multipliez ce nombre par lui même puis ajoutez C
+- multipliez le résultat par lui même puis ajoutez C
+- multipliez le résultat par lui même puis ajoutez C
+...
+
+Répétez ce petit calcul en partant à chaque fois du résultat obtenu,
+jusqu’à obtenir un nombre très grand. Si vous n’arrivez jamais
+à un nombre très grand, notez ce nombre sur un carnet.
+
+</div></code></code></pre>
+<p data-line="30" class="code-line code-line code-active-line">Éffectuez ce programme avec pleins de nombres différents (avec tous les nombres en fait).<br>
+Tous les nombres notés sur votre carnet, c’est ça l’ensemble de julia. Et on peut afficher cet ensemble de nombres sur un écran, ce que vous voyez sur cette page (à droite).</p>
+<p data-line="33" class="code-line code-line"><strong>Note</strong>: le résultat dépend du nombre C choisi.<br>
+Il n’y a donc pas un ensemble de Julia, mais une infinité !</p>
+<p data-line="36" class="code-line code-line">Par exemple, si vous aviez choisi C = <em>0,3 + 0,5 i</em>, vous auriez obtenu ceci:</p>
+<p data-line="38" class="code-line code-line"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Julia_%28Fractal%29.png/154px-Julia_%28Fractal%29.png" alt="" class="" id="image-hash--554562150"></p>
+<h1 id="mandelbrot" data-line="40" class="code-line code-line">Mandelbrot</h1>
+<p data-line="42" class="code-line code-line">La construction de <a href="https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot" data-href="https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot" title="https://fr.wikipedia.org/wiki/Ensemble_de_Mandelbrot">l’ensemble de Mandelbrot</a> est assez similaire.</p>
+<p data-line="44" class="code-line code-line">La différence, c’est qu’il ne faut pas choisir de nombre au départ: il y a un seul ensemble de Mandelbrot.</p>
+<p data-line="46" class="code-line code-line">Et pourtant, il est surement plus mystérieux et intéréssant que tous les ensembles de julia réunis (et avouez, il est pas tellement stylé ?)</p>
+<p data-line="48" class="code-line code-line">Un point intéréssant est que Mandelbrot est une carte des ensembles de Julia:<br>
+cliquez sur une partie blanche de l’ensemble de Mandelbrot (à gauche). Vous devriez obtenir à gauche un ensemble de julia en un seul morceau: (on dit un ensemble connexe).<br>
+Maintenant, si vous cliquez sur une partie à l’extérieur de Mandelbrot, vous obtiendrez un ensemble de Julia découpé en plein de parties (une infinité en fait): ce qu’on appelle une poussière de Cantor.</p>
+<h3 id="explorer-mandelbrot" data-line="53" class="code-line code-line">Explorer Mandelbrot:</h3>
+<p data-line="54" class="code-line code-line">voici un site dans lequel vous pouvez explorer sans fin Mandelbrot pour en découvrir les merveilles:</p>
+<p data-line="56" class="code-line code-line"><a href="http://mandel.gart.nz/" data-href="http://mandel.gart.nz/" title="http://mandel.gart.nz/">http://mandel.gart.nz/</a></p>
+<h2 id="pour-aller-plus-loin" data-line="59" class="code-line code-line">Pour aller plus loin</h2>
+<p data-line="61" class="code-line code-line">Vidéo qui parle des mathématiques (et des mathématiciens) derrière Mandelbrot et Julia</p>
+<p data-line="63" class="code-line code-line"><a href="https://www.youtube.com/watch?v=Y4ICbYtBGzA" data-href="https://www.youtube.com/watch?v=Y4ICbYtBGzA" title="https://www.youtube.com/watch?v=Y4ICbYtBGzA"><img src="https://img.youtube.com/vi/Y4ICbYtBGzA/0.jpg" alt="" class="" id="image-hash--1127300824"></a></p>
+
+				<div class="code-line" data-line="64"></div>
+			</div>
+		</div>
+		<div class="h-box">
+			<a href="../" class="back"></a>
+			<h2 class="computer" style="text-align: center; margin: 5px auto">Ensembles de julia</h1>
+		</div>
+		<div class="box">
+			<div style="margin: auto"><canvas id="mandel"></canvas></div>
+			<div style="margin: auto"><canvas id="julia"></canvas></div>
+		</div>
+		<div id="complex" style="text-align: center;"></div>
+
+
+		<noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>		
+		<script type="module" src="./index.js?1"></script>
+	</body>
+</html>

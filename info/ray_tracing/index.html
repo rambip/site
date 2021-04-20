@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/style.css?1500">
+		<title>3D</title>
+	</head>
+	<body>
+		<div class="doc">
+			<button class="info"></button>
+			<div class="explanation">
+				<h1 id="3d-calculs-et-ray-casting" data-line="0" class="code-line">3D, calculs et ray-casting</h1>
+<p data-line="3" class="code-line">Le monde 3D que vous pouvez explorer sur cette page utilise la méthode du ray-casting.</p>
+<p data-line="5" class="code-line">Le <a href="https://fr.wikipedia.org/wiki/Raycasting" data-href="https://fr.wikipedia.org/wiki/Raycasting" title="https://fr.wikipedia.org/wiki/Raycasting">ray-casting</a> est une méthode informatique pour créer des rendus 3D simples.</p>
+<p data-line="7" class="code-line">Le concept n’est pas forcémment facile à utiliser, et ce n’est pas le meilleur choix pour du rendu 3D dans un navigateur (j’y reviendrais).</p>
+<br>
+<p data-line="11" class="code-line">Alors pourquoi avoir utilisé cette technique ?</p>
+<ul>
+<li data-line="13" class="code-line">I. parce que j’avais envie 😄</li>
+<li data-line="14" class="code-line">II. parce que le concept en soi est plus simple</li>
+</ul>
+<p data-line="16" class="code-line">En effet, le ray-casting est beaucoup plus facile à comprendre que d’autres techniques comme les matrices de projection.</p>
+<h3 id="approche-classique-des-moteurs-3d" data-line="19" class="code-line">Approche classique des moteurs 3D</h3>
+<p data-line="21" class="code-line">L’approche classique est de décomposer l’objet en pleins de triangles, et de regarder où chaque triangle doit aller sur l’écran pour ensuite le colorier.</p>
+<p data-line="23" class="code-line"><img src="https://static.techspot.com/articles-info/1888/images/2019-08-11-image-3-p_1100.webp" alt="" class="" id="image-hash-363728572">
+(le rectangle bleu est l’écran sur lequel on veut afficher l’objet)</p>
+<p data-line="26" class="code-line">Pour effectuer cette transformation du triangle dans l’espace vers l’écran, on a besoin de ce genre d’outils mathématiques:</p>
+<p data-line="28" class="code-line"><img src="https://tse2.mm.bing.net/th?id=OIP.Y_Ucu0vydOiGrlMS-dBuCgHaB5&amp;pid=Api" alt="" class="" id="image-hash-629608322"></p>
+<p data-line="30" class="code-line">Et après avoir trouvé sa position sur l’écran, il faut colorier toute la zone de l’écran correspondant, et faire varier la couleur en fonction de la couleur de l’objet, de l’orientation par rapport à la lumière …</p>
+<p data-line="32" class="code-line">C’est comme ça qu’est faite la 3D dans les jeux comme minecraft, mais pour un premier projet, je dois avouer que je cherchais plus simple.</p>
+<br>
+<h3 id="approche-du-ray-casting" data-line="37" class="code-line">Approche du ray-casting</h3>
+<p data-line="40" class="code-line">L’approche du ray-casting est beaucoup plus simple:</p>
+<p data-line="42" class="code-line">On va imaginer qu’un rayon de lumière part d’une source (l’œil de l’observateur), traverse l’écran, et on va regarder où ce rayon de lumière touche un mur/bloc/objet quelconque.</p>
+<p data-line="44" class="code-line"><img src="https://tse3.mm.bing.net/th?id=OIP.K6v1nr6uSoSpLH5c03XdBwAAAA&amp;pid=Api" alt="" class="" id="image-hash--1245485988"></p>
+<p data-line="46" class="code-line">Et en continuant de suivre la trajectoire de ce rayon lumineux après qu’il ai rebondi sur la surface, on peux ajouter l’éclairement, les reflets, la transparence … Cela devient du <a href="https://fr.wikipedia.org/wiki/Ray_tracing" data-href="https://fr.wikipedia.org/wiki/Ray_tracing" title="https://fr.wikipedia.org/wiki/Ray_tracing">ray-tracing</a></p>
+<p data-line="48" class="code-line">Le ray-tracing a été énormément utilisé dans les films d’animation. Par exemple, Disney utilise maintenant dans tous ces films <a href="https://www.pixar.com/renderman" data-href="https://www.pixar.com/renderman" title="https://www.pixar.com/renderman">renderman</a>, un outil 3D basé sur le ray-tracing.</p>
+<p data-line="52" class="code-line">La technique est donc très simple, mais elle est <strong>couteuse en calculs</strong>:
+Il faut calculer la trajectoire de chaque rayon pour chaque pixel, en le faisant rebondir sur chaque objet avant qu’il touche la source de lumière.</p>
+<p data-line="56" class="code-line">Sur cette page, le rendu n’est pas trop lent car il suffit de regarder si le rayon traverse un plan (dans x, y et z) ce qui est assez facile. Pas de rebond, de source de lumière ou de triangles à considérer !</p>
+<br>
+<h3 id="comparatif-des-2-techniques" data-line="60" class="code-line">Comparatif des 2 techniques</h3>
+<table>
+<thead>
+<tr>
+<th>ray-tracing</th>
+<th>rendu 3D classique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>simple à comprendre</td>
+<td>beaucoup de maths, même pour un seul triangle</td>
+</tr>
+<tr>
+<td>couteux en calculs donc très lent</td>
+<td>très rapide</td>
+</tr>
+<tr>
+<td>rendus plus beaux que réels quand on attend assez longtemps</td>
+<td>rendus limités (pas mieux que minecraft)</td>
+</tr>
+<tr>
+<td><a href="https://www.youtube.com/watch?v=Popg7ej4AUU&amp;list=PLujxSBD-JXgk1hb8lyu6sTYsLL39r_3bG&amp;index=30" data-href="https://www.youtube.com/watch?v=Popg7ej4AUU&amp;list=PLujxSBD-JXgk1hb8lyu6sTYsLL39r_3bG&amp;index=30" title="https://www.youtube.com/watch?v=Popg7ej4AUU&amp;list=PLujxSBD-JXgk1hb8lyu6sTYsLL39r_3bG&amp;index=30">beaucoup de recherche</a>, avec sans cesse de nouvelles techniques</td>
+<td>beaucoup moins</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p data-line="72" class="code-line">Récemment, diverses techniques hybrides ont vu le jour, qui mélangent les deux approches. Elles sont principalement utilisées dans les <a href="https://www.jeuxvideo.com/news/1183427/ray-tracing-qu-est-ce-que-c-est-et-comment-ca-marche.htm" data-href="https://www.jeuxvideo.com/news/1183427/ray-tracing-qu-est-ce-que-c-est-et-comment-ca-marche.htm" title="https://www.jeuxvideo.com/news/1183427/ray-tracing-qu-est-ce-que-c-est-et-comment-ca-marche.htm">jeux vidéos</a></p>
+<p data-line="74" class="code-line">Il y a énormément de nouveautés dans ces domaines, avec par exemple les <a href="https://developer.nvidia.com/rtx/raytracing" data-href="https://developer.nvidia.com/rtx/raytracing" title="https://developer.nvidia.com/rtx/raytracing">gpu de l’entreprise Nvidia</a> qui permettent de calculer ces 3D plus vraies que natures en temps réel !</p>
+<hr>
+<h2 id="pour-aller-plus-loin" data-line="78" class="code-line">Pour aller plus loin</h2>
+<p data-line="79" class="code-line">Un <a href="https://www.techspot.com/article/1888-how-to-3d-rendering-rasterization-ray-tracing/" data-href="https://www.techspot.com/article/1888-how-to-3d-rendering-rasterization-ray-tracing/" title="https://www.techspot.com/article/1888-how-to-3d-rendering-rasterization-ray-tracing/">article</a> très complet pour comprendre la différence entre les deux techniques</p>
+
+				<div class="code-line" data-line="80"></div>
+			</div>
+		</div>
+		<div class="h-box">
+			<a href="../" class="back"></a>
+			<div style="width: 100%">
+				<h2 style="text-align: center">De la 3D</h1>
+			</div>
+		</div>
+        <div class="parent-box">
+            <div style="margin:15px"><canvas id="canvas"></canvas></div>
+		</div>
+		<div class="parent-box"><div>Utilise les flèches pour te déplacer <br> Tu peux créer des blocs avec ta souris <br> Tu peux aussi les détruire avec la touche Maj</div></div>
+		
+
+
+		<noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>		
+		<script type="module">
+			import init from './ray_tracing.js';
+			import {Game} from './ray_tracing.js';
+
+			// init canvas size
+			const width = 700;
+			const height = 500;
+
+			// init canvas and draw utilities
+			const canvas = document.getElementById("canvas"); canvas.width = width; canvas.height=height;
+			const c_rect = canvas.getBoundingClientRect();
+			const ctx = canvas.getContext('2d');
+			let image = new ImageData(width, height);
+
+			// game and debuging
+			let demo;
+
+			var pressedKeys = {};
+			window.onkeyup = function(e) { pressedKeys[e.keyCode] = false; }
+			window.onkeydown = function(e) { pressedKeys[e.keyCode] = true;}
+
+			function game_loop() {
+				if (pressedKeys[37]) {demo.rotate(0.05)};
+				if (pressedKeys[39]) {demo.rotate(-0.05)};
+				if (pressedKeys[40]) {demo.forward(-0.06)};
+				if (pressedKeys[38]) {demo.forward(0.06)};
+
+				demo.update();
+			}
+
+
+			function new_game(){
+                demo = Game.new(50.5, 50.5, width, height);
+
+				demo.set_bloc_color(1, 120, 80, 30);
+				demo.set_bloc_color(12, 100, 100, 200);
+				demo.set_bloc_color(13, 150, 100, 150);
+				demo.set_bloc_color(100, 100, 150, 100);
+
+
+				demo.set_bloc_color
+				for (let x = 0; x < 64; x++){
+					for (let y = 0; y < 64; y++){
+						demo.set_bloc(x, y, 0, 1)
+						for (let z = 0; z < 16; z++){
+							if (x == 0 || y == 63) demo.set_bloc(x, y, z, 12)
+							if (x == 0 || y == 63) demo.set_bloc(x, y, z, 13)
+							if (Math.random() > 0.99) {demo.set_bloc(x, y, z, 12)}
+							if (Math.random() > 0.99) {demo.set_bloc(x, y, z, 13)}
+						}
+					}
+				}
+			}
+
+			function change_cube(event){
+				let x = event.clientX - c_rect.left;
+				let y = event.clientY - c_rect.top;
+				if (event.shiftKey) {demo.shoot_cube(x, y, 12)}
+				else           {demo.create_cube(x, y, 100, 12)}
+			}
+			document.addEventListener("mousedown", change_cube);
+
+            function frame_loop(x){
+                ctx.putImageData(demo.render(12), 0, 0);
+
+                setTimeout(() => requestAnimationFrame(frame_loop), 15);
+			}
+
+			init().then(() => {new_game(); frame_loop(); setInterval(game_loop, 1);});
+					</script>
+	</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/style.css?1500">
+    <title>Snake</title>
+    <style>
+        div {
+            text-align: center;
+            font-size: lbarge;
+        }
+    </style>
+</head>
+<blocs>
+    <div class="doc">
+        <button class="info"></button>
+        <div class="explanation">
+            <p data-line="0" class="code-line">Si vous avez eu le courage de jouer assez longtemps, vous avez pu voir qu’il y a plusieurs niveaux dans ce jeu (sinon, courage: il suffit d’avoir 10 points cumulés pour passer au niveau suivant)</p>
+<p data-line="2" class="code-line">Et dès le premier nouveau niveau, vous avez surement vu des choses étranges se passer: le <em>snake</em> peut traverser les murs ! Et quand on commence à coller les côtés entre eux, un carré peut devenir beaucoup plus intéréssant.</p>
+<h3 id="vous-avez-dit-topologie" data-line="5" class="code-line">Vous avez dit topologie ?</h3>
+<p data-line="7" class="code-line">La <a href="https://fr.wikipedia.org/wiki/Topologie" data-href="https://fr.wikipedia.org/wiki/Topologie" title="https://fr.wikipedia.org/wiki/Topologie">topologie</a>, c’est le domaine des maths qui s’intéresse à la structure, à la forme des objets.</p>
+<p data-line="9" class="code-line">Par exemple, on peut se dire qu’entre une boule de pétanque et une boule de bowling, il n’y a pas grande différence, si on se dit que la taille n’est pas importante. Mais finalement, entre un ballon de basket et un ballon de rugby non plus: même si ils n’ont pas exactement la même géométrie, ils ont une forme similaire: il suffit d’applatir le ballon de basket pour avoir un ballon de rugby.</p>
+<blockquote data-line="11" class="code-line">
+<p data-line="11" class="code-line">On dit que le ballon de basket est <strong>homéomorphe</strong> au ballon de rugby</p>
+</blockquote>
+<p data-line="13" class="code-line">Mais en topologie, on va beaucoup plus loin: par exemple, un carré est homéomorphe à un disque 😵</p>
+<p data-line="15" class="code-line">Imaginez une toile élastique incassable, qu’on peut seulement étirer et déformer à l’infini. On va mettre des couleurs sur cette toile pour voir ce qui se passe.</p>
+<p data-line="17" class="code-line">Voilà comment on peut passer du disque au carré.</p>
+<p data-line="19" class="code-line"><img src="square_circle.png" alt="" class="" id="image-hash--1337235484"></p>
+<p data-line="21" class="code-line">On voit bien qu’entre les deux images, on a "cassé aucune ligne"</p>
+<blockquote data-line="23" class="code-line">
+<p data-line="23" class="code-line">En topologie, deux espaces sont homéomorphes si on peut passer de l’un à l’autre de façon continue, sans déchirure ni recollement.</p>
+</blockquote>
+<p data-line="25" class="code-line">Donc, et utilisant le même principe, on peut dire qu’une tasse et une bouée, c’est à peu près la même chose:</p>
+<p data-line="27" class="code-line"><img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Mug_and_Torus_morph.gif" alt="" class="" id="image-hash-523531863"></p>
+<p data-line="29" class="code-line">Et pareil entre une vache et une sphère:</p>
+<p data-line="31" class="code-line"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Spot_the_cow.gif/300px-Spot_the_cow.gif" alt="" class="" id="image-hash--472696573"></p>
+<p data-line="35" class="code-line"><strong>Et quel rapport avec notre jeu ?</strong></p>
+<p data-line="37" class="code-line">C’est très simple: Les mathématiciens adorent classer des trucs, et les spécialistes de la topologie ont essayé de découvrir tous les espaces topologiques possibles en 2 dimensions. Et bonne nouvelle, on peut tous les créer en collant les bords d’un carré !!!</p>
+<p data-line="39" class="code-line">Alors prenons un carré très élastique, de la colle mathématique et c’est parti 😉</p>
+<h4 id="1-le-ruban" data-line="41" class="code-line">1) le ruban</h4>
+<p data-line="43" class="code-line">On va commencer simple, en collant les deux côtés d’un carré entre eux.</p>
+<p data-line="45" class="code-line">En fait, cette idée existe dans plusieurs jeux d’arcade, comme par exemple:</p>
+<p data-line="47" class="code-line"><img src="https://blogdemaths.files.wordpress.com/2014/04/pac-man_recollement_cylindre_figure.png?w=640&amp;h=265" alt="" class="" id="image-hash--2004288203"></p>
+<p data-line="49" class="code-line">Vous pouvez le faire sur une vraie feuille de papier et du ruban adhesif. Vous obtenez un cylindre, qu’on appelle d’avantage un ruban en topologie.</p>
+<h4 id="2-le-tore" data-line="51" class="code-line">2) le tore</h4>
+<p data-line="52" class="code-line">Si vous regardez le ruban qu’on vient de créer, on a encore un problème: il y a un bord.</p>
+<p data-line="54" class="code-line">Mais on peut encore procéder à un collage, et raccorder le bord du haut et celui du bas. Vous devinez quelle forme on obtient ?
+N’oubliez pas, vous avez le droit d’étirer la surface autant que vous voulez !</p>
+<p data-line="57" class="code-line"><strong>Solution:</strong></p>
+<p data-line="59" class="code-line"><img src="https://plus.maths.org/issue10/features/topology/gluetorus.gif" alt="" class="" id="image-hash--502824953"></p>
+<p data-line="61" class="code-line">On obtient une bouée. En mathématiques, cette forme s’appelle un tore
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Torus.png" alt="" class="" id="image-hash-600495870"></p>
+<h4 id="3-la-sph%C3%A8re" data-line="64" class="code-line">3) la sphère</h4>
+<p data-line="66" class="code-line">Là, on commence les choses sérieuses.</p>
+<p data-line="68" class="code-line">Quand on a fait le premier collage de notre carré, on a choisi les deux côtés opposés. Mais on aurait pu faire autrement.</p>
+<p data-line="70" class="code-line">Un autre moyen de faire est de coller les côtés adjacents entre eux:</p>
+<p data-line="72" class="code-line"><img src="fold1.png" alt="" class="" id="image-hash--1584484862"></p>
+<p data-line="74" class="code-line">Si vous essayez avec un carré de papier, vous obtenez un cone.
+Et un cone, quand on l’aplatit, ça donne … Un disque. Et un disque, c’est homéomorphe à un carré ! Donc pour l’instant, ce n’est pas très intéréssant.</p>
+<p data-line="77" class="code-line">Mais maintenant, on va coller les deux autres côtés ensembles.
+Cette fois, ce qui se passe est plus difficile à imaginer</p>
+<ul>
+<li data-line="80" class="code-line"><strong>0.</strong> On part d’un carré élastique.</li>
+</ul>
+<p data-line="82" class="code-line"><img src="square_sphere_1.png" alt="" class="" id="image-hash--1251574381"></p>
+<ul>
+<li data-line="84" class="code-line"><strong>1.</strong> on va déformer ce carré en l’étirant aux 2 coins opposés</li>
+</ul>
+<p data-line="86" class="code-line"><img src="square_sphere_2.png" alt="" class="" id="image-hash--1250650860"></p>
+<ul>
+<li data-line="89" class="code-line"><strong>2.</strong> On colle les côtés verts entre eux, et les côtés bleus entre eux</li>
+</ul>
+<p data-line="91" class="code-line"><img src="square_sphere_3.png" alt="" class="" id="image-hash--1249727339"></p>
+<ul>
+<li data-line="93" class="code-line"><strong>3.</strong> on obtient deux triangles collés entre eux sur les bords. Pensez à un chausson au pomme ou à une calzone, par exemple.</li>
+</ul>
+<p data-line="95" class="code-line"><img src="square_sphere_4.png" alt="" class="" id="image-hash--1248803818"></p>
+<ul>
+<li data-line="97" class="code-line"><strong>4.</strong> Il ne reste plus qu’à mettre notre chausson au four. Si il gonfle assez, il deviendra une sphère !</li>
+</ul>
+<p data-line="99" class="code-line">Si vous avez suivi toutes les étapes, vous avez vu que j’ai beaucoup transformé mon carré, mais je n’ai fait aucun collage ou découpage à part coller les 4 côtés. Donc pour la topologie, pas de problème.</p>
+<br>
+<h4 id="4-le-ruban-de-moebius" data-line="103" class="code-line">4) le ruban de moebius</h4>
+<p data-line="105" class="code-line">Revenons à notre ruban.
+Si on essaie de le décrire, on s’aperçoit qu’il a:</p>
+<ul>
+<li data-line="107" class="code-line">2 faces</li>
+<li data-line="108" class="code-line">2 bords, 1 en haut et 1 en bas</li>
+</ul>
+<p data-line="110" class="code-line">Et si je vous disais qu’il était possible de faire avec du papier un objet avec <em>un seul bord</em> et <em>une seule face</em> … Essayez d’imaginer à quoi un tel objet pourrait ressembler.</p>
+<p data-line="112" class="code-line">Si vous n’y arrivez pas, prenez un papier, des ciseaux et de la colle.</p>
+<ul>
+<li data-line="114" class="code-line">
+<p data-line="114" class="code-line">Découpez une bande de papier de quelques centimètres de large.</p>
+</li>
+<li data-line="116" class="code-line">
+<p data-line="116" class="code-line">Collez les deux extrémités de la bande entre eux, mais <strong>en faisant un demi tour avant</strong></p>
+</li>
+</ul>
+<p data-line="118" class="code-line"><img src="https://lmoussakova.files.wordpress.com/2012/05/rubanmoebiusstep4.jpg" alt="" class="" id="image-hash--1180309522"></p>
+<p data-line="120" class="code-line">Ce que vous obtenez s’appelle un ruban de moebius.</p>
+<img src="https://touslesinsolites.files.wordpress.com/2012/04/mobius-4.png" width="50%">
+<p data-line="124" class="code-line">Vous pouvez essayer de le colorier, en prenant une couleur par face.
+Vous pouvez aussi essayer de le découper dans le sens de la largeur.</p>
+<p data-line="129" class="code-line">Et pour un topologiste, c’est une façon tout à fait normale de recoller les bords d’un carré !</p>
+<br>
+<h4 id="5-la-bouteille-de-klein" data-line="134" class="code-line">5) la bouteille de klein</h4>
+<p data-line="136" class="code-line">Je vous laisse celui là en exercice:</p>
+<p data-line="138" class="code-line">Essayez de coller les bords de ce carré de cette façon:</p>
+<p data-line="140" class="code-line"><img src="https://i.stack.imgur.com/2iFIg.png" alt="" class="" id="image-hash-562231785"></p>
+<br>
+<br>
+<p data-line="145" class="code-line">Normalement, vous tombez sur cet objet: La bouteille de Klein</p>
+<p data-line="147" class="code-line"><img src="https://qph.fs.quoracdn.net/main-qimg-4ee52642d3b35d5a4269c33ad4a88e74-c" alt="" class="" id="image-hash-78905268" width="50%"></p>
+<h4 id="6-le-plan-projectif-r%C3%A9el" data-line="150" class="code-line">6) le plan projectif réel</h4>
+<p data-line="152" class="code-line">Si il vous reste encore des neurones, aller voir cette vidéo pour voir ce qui se passe quand on relie les côtés d’un carré deux à deux opposés, en leur faisant faire chacun un demi tour.</p>
+<p data-line="154" class="code-line"><a href="https://www.youtube.com/watch?v=lEvJqGvY24c" data-href="https://www.youtube.com/watch?v=lEvJqGvY24c" title="https://www.youtube.com/watch?v=lEvJqGvY24c"><img src="https://img.youtube.com/vi/lEvJqGvY24c/0.jpg" alt="" class="" id="image-hash--1380780401"></a></p>
+<p data-line="157" class="code-line"><br><br><br><br></p>
+<h2 id="pour-aller-plus-loin" data-line="159" class="code-line">Pour aller plus loin</h2>
+<p data-line="162" class="code-line">La topologie est un domaine des maths très vaste, et je n’ai fait qu’éfleurer les concepts qui existent. On a fait la liste de toutes les variétés en 2 dimensions, mais on peut faire la même chose avec la 3D et toutes les autres dimensions, et on a même pas parlé de connexité.</p>
+<p data-line="164" class="code-line">Si vous voulez creuser un peu plus, vous pouvez aller voir cette vidéo:</p>
+<p data-line="166" class="code-line"><a href="https://www.youtube.com/watch?v=ayjck76iSOA" data-href="https://www.youtube.com/watch?v=ayjck76iSOA" title="https://www.youtube.com/watch?v=ayjck76iSOA"><img src="https://img.youtube.com/vi/ayjck76iSOA/0.jpg" alt="" class="" id="image-hash--459062263"></a></p>
+
+				<div class="code-line" data-line="170"></div>
+        </div>
+    </div>
+    <a href="../" class="back"></a>
+    <h2 style="width: 100%; text-align: center;">Topological Snake</h2>
+    <div id="level">&InvisibleComma;</div>
+    <div class="h-box adapt">
+        <button id="previous" style="margin: auto; margin-right: 10px; font-size: large; visibility: hidden;" onclick="Game.level=Math.max(0, Game.level-1); reset()">⬅</button>
+        <p id="game" style="width: min-content; font-size: 3vmin;"></p>
+        <button id="next" style="margin: auto; margin-left: 10px; font-size: large; visibility: hidden;" onclick="Game.level = Math.min(Game.level+1, levels.length-1); reset()">➡</button>
+    </div>
+    <div id="message">Utilise les flèches de ton clavier pour jouer (appuie pour continuer)</div>
+    <script>
+        let SIZE = 17;
+        let M = SIZE-1;
+        let game = document.getElementById("game");
+        let message_box = document.getElementById("message");
+        let level_box = document.getElementById("level");
+        
+        let buffer = new Uint8Array(SIZE * SIZE);
+        let Chars = {
+            char_array: ['⬛', '⬜', '🟪', '🟦', '🟥', '🟢', '🟠'],
+            background: 0,
+            body: {false: 1, true: 2},
+            head: {false: 3, true: 4},
+            bonus: {false: 5, true: 6},
+        }
+
+        let Game = {
+            game_over: true,
+            waiting: false,
+            last_game_over: -1,
+            level: 0,
+            unlocked: 0,
+            score: 0,
+            total_score: 0,
+        }
+
+        let Snake, Bonus;
+
+        let levels = [
+            {
+                title: "carré",
+                f: ((x, y) => { // square
+                if (x >= SIZE || x < 0 || y >= SIZE|| y < 0){return null}
+                else {return {x: x, y:y}}}),
+            border: ["#e91868", "#e91868", "#e91868", "#e91868"]},
+
+            {
+                title: "ruban",
+                f: ((x, y) => { // ruban
+                if (y >= SIZE|| y < 0){return null}
+                else {return {x: (x+SIZE)%SIZE, y:y}}}),
+            border: ["", "#e91868", "", "#e91868"]},
+
+            {
+                title: "tore",
+                f: ((x, y) => { // torus
+                return {x: (x+SIZE)%SIZE, y:(y+SIZE)%SIZE}}),
+            border: ["", "cyan", "", "cyan"]},
+
+            {
+                title: "sphère",
+                f: ((x, y) => { // moebius
+                if      (y >= SIZE){return {x: M,  y:x, dir: 1}}
+                else if (x >= SIZE){return {x: y,y:M, dir: -1}}
+                else if (  y < 0  ){return {x: 0,       y: x, dir: 1}}
+                else if (  x < 0  ){return {x: y,       y:0, dir: -1}}
+                else {return {x: x, y: y}}}),
+            border: ["blue", "cyan", "pink", "purple"]},
+
+            {
+                title: "ruban de moebius",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0){return null}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "#e91868", "cyan", "#e91868"]},
+
+            {
+                title: "bouteille de klein",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0){return {x: x, y:(y+SIZE)%SIZE}}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "", "cyan", ""]},
+
+            {
+                title: "plan projectif réel",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0)      {return {x: M-x, y:(y+SIZE)%SIZE, p: true}}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "pink", "cyan", "purple"]},
+        ]
+
+        function reset(){
+            Snake = {dir: 2, px: 5, py: 5, blocs: [{x: 4, y: 5, p:false}, {x: 5, y: 5, p:false}], p: false, dir: 2}
+            Bonus = {x: Math.floor(SIZE/2), y: Math.floor(SIZE/2), p: false,}
+            
+            Game.game_over = false;
+            Game.waiting = true;
+            Snake.dir = 2;
+
+            Game.score = 0;
+            
+            document.body.style.background = "";
+
+            game.style.border = "2px solid";
+            
+            game.style.borderRightColor = levels[Game.level].border[0];
+            game.style.borderBottomColor= levels[Game.level].border[1];
+            game.style.borderLeftColor  = levels[Game.level].border[2];
+            game.style.borderTopColor   = levels[Game.level].border[3];
+
+            message_box.style.color = "white";
+            message_box.innerText = "Appuie sur une touche pour commencer";
+
+            level_box.innerText = "NIVEAU " + Game.level.toString() + " : " + levels[Game.level].title;
+
+            document.getElementById("previous").style.visibility = Game.level==0 ? 'hidden' : 'visible';
+            document.getElementById("next").style.visibility = Game.level==Game.unlocked ? 'hidden' : 'visible';
+
+            move();
+            display();
+        }
+
+        function move(){
+            // move head
+            Snake.blocs = [{x : Snake.px, y: Snake.py, p: Snake.p}].concat(Snake.blocs);
+
+            px = Snake.px + [-1, 0, 1, 0][Snake.dir];
+            py = Snake.py + [0, -1, 0, 1][Snake.dir];
+
+            let result = levels[Game.level].f(px, py);
+            if (result) {
+                px = result.x; py = result.y
+                if (result.p){Snake.p = !Snake.p}
+                if (result.dir){Snake.dir = (Snake.dir+result.dir+4)%4}
+            }
+            else {return true;}
+
+            // collision entre la tête et le corps
+            if (Snake.blocs.some(b => b.x==px && b.y==py)){return true};
+
+            if (px == Bonus.x && py == Bonus.y && Snake.p == Bonus.p){
+                // level up
+            while (Snake.blocs.some(b => b.x==Bonus.x && b.y == Bonus.y && Bonus.p == b.p) || px == Bonus.x && py == Bonus.y){
+                    Bonus.x = Math.floor(Math.random()*SIZE);
+                    Bonus.y = Math.floor(Math.random()*SIZE);
+                }
+                if (levels[Game.level].parity) {Bonus.p = Math.random()>0.5;}
+                Game.score ++;
+                message_box.innerText = "score : " + Game.score.toString();
+            } // on raccourci le corps du serpent si il n’a pas le bonus
+            else {Snake.blocs.pop()}
+            
+            Snake.px = px;
+            Snake.py = py;
+
+            // affichage
+            buffer.fill(Chars.background);
+
+            buffer[Snake.py*SIZE + Snake.px] = Chars.head[Snake.p];
+            Snake.blocs.forEach(b => {buffer[b.y*SIZE + b.x] = Chars.body[b.p]});
+            buffer[Bonus.y*SIZE + Bonus.x] = Chars.bonus[Bonus.p];
+
+            return false;
+        }
+
+        function display(){
+            let text = "";
+            for (let iy = 0; iy < SIZE; iy++) {
+                for (let ix = 0; ix < SIZE; ix++) {
+                    let n = buffer[iy*SIZE + ix];
+                    text += Chars.char_array[n];
+                }
+                text += '\n';
+            }
+            game.innerText = text;
+        }
+
+        window.onkeydown = function(e) {
+            if (Game.waiting) {Game.waiting=false; message_box.innerText=""}
+            else if (Game.game_over && Date.now() - Game.last_game_over > 300) {reset();}
+            if (e.keyCode >= 37 && e.keyCode <= 41){
+                let key = e.keyCode-37;
+                if (Math.abs(Snake.dir - key)%2==1) {
+                    Snake.dir = key
+                }
+            }
+        }
+
+        function game_loop(){
+            if (!(Game.game_over || Game.waiting)){
+                if (move()){
+                    // game over
+                    Game.game_over = true;
+                    Game.last_game_over = Date.now();
+                    message_box.style.color = "red";
+
+                    Game.total_score += Game.score;
+                    if (Game.total_score>7 && Game.unlocked<levels.length-1){Game.unlocked++; Game.total_score=0; document.getElementById("next").style.visibility="visible"};
+                    message_box.innerText = "PERDU ! (score : " + Game.score.toString() + ")\n\n Clique sur une touche pour recommencer";
+                };
+                display();
+            }
+        }
+        display();
+        setInterval(game_loop, 100);
+    </script>
+</blocs>
+</html>

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=0.6">
+	<title id="title">Site de rambi !</title>
+	<link rel="stylesheet" href="/style.css?1500">
+</head>
+<body>
+	<div class="doc">
+		<button class=info></button>
+		<div class="explanation">Bonjour !<br> Moi c’est la fenetre information. Je suis sur presque toutes les pages de ce site !<br><br> Ce site a un but éducatif: si tu veux apprendre des trucs, n’oublie pas de revenir me voir …</div>
+	</div>
+	<div style="text-align: center; width:100%"><p id="message" style="color : #87df87; text-align: center;">Bonjour !</p></div>
+
+	<div class="index">
+		<h1>Contenu</h1>
+		<li><a href="./math">projets mathématiques</a></li>
+		<li><a href="./art">projets artistiques</a></li>
+		<li><a href="./info">projets informatiques</a></li>
+		<li><a href="./3d-art">un univers étrange</a></li>
+		<li><a href="./links">des liens en vrac</a></li>
+		<li><a href="./feedback.html">donnez votre avis</a></li>
+
+
+	</div>
+	<p style="font-size: 1.1vmax;color: white; text-align: justify; margin: 0px 10vw;">
+		Bonjour à toi aventurier du web !<br>
+		Ici tu es sur mon site. Le développement web n’est pas mon métier, c’est juste
+		 une des choses que j’ai essayé de faire, parmi beaucoup d’autres.<br>
+		Sur ces pages, tu trouveras de nombreux projets informatiques, artistiques, mathématiques…<br>
+		Ils ne présentent pas d’intérêt pratique, j’espère juste partager les concepts
+		que je trouve intéréssants, marrants, fondamentaux; pour émerveiller (ou en tout cas essayer) ceux qui le visitent.
+		N’oublie pas de cliquer sur la loupe pour plus d’information !
+	</p>
+	<script>
+		let m = 0;
+		function update(){
+			m = (m+0.2)%50;
+			let c = "";
+			for (var i = 0; i < m; i++) {
+				c += String.fromCharCode(0x30A0 + Math.random() * (0x30FF-0x30A0+1));
+			}
+			c += "bonjour !";
+			for (var i = m; i < 40; i++) {
+				c += String.fromCharCode(0x30A0 + Math.random() * (0x30FF-0x30A0+1));
+			}
+
+			document.getElementById("message").innerHTML = c;
+		}
+		if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){}
+		else {setInterval(update, 100);}
+	</script>
+</body>
+</html>
+
