@@ -1,0 +1,85 @@
+<p>Le <a href="https://fr.wikipedia.org/wiki/Jeu_de_la_vie"><strong>jeu de la vie</strong></a> est l’automate cellulaire le plus connu.</p>
+<p>Il a été inventé par <a href="https://fr.wikipedia.org/wiki/John_Horton_Conway">John Conway</a>, un mathématicien génial !</p>
+<p>(On appel d’ailleurs le jeu de la vie <code>Conway’s Game of life</code> en anglais)</p>
+<p><br> <br></p>
+<p>Un automate cellulaire est un type de simualiton extremement simple. C’est presque un jeu informatique.</p>
+<p>Pour faire un automate cellulaire, il faut seulement:</p>
+<ul>
+<li>Une grille de cellules</li>
+<li>Des états à mettre dans cette grille</li>
+<li>Une règle qui va déterminer comment chaque cellule va évoluer en fonction de ses voisins.</li>
+</ul>
+<p><strong>Note</strong>: On considère en général les 8 voisins autour d’une cellule:</p>
+<pre><code>⬜⬜⬜⬜⬜
+⬜⭕⭕⭕⬜   Les 8 voisins (en rouge)
+⬜⭕⬛⭕⬜    de la cellule noire
+⬜⭕⭕⭕⬜
+⬜⬜⬜⬜⬜</code></pre>
+<p>Pour les automates cellulaires type <em>jeu de la vie</em>, ce qu’on appelle le nombre de voisins est simplement le nombre de cellules vivantes parmi les voisins.</p>
+<pre><code>⬜⬜⬜🟫🟫
+⬜🟫🟫⬜⬜   La cellule bleue a 5 voisins
+⬜🟫🟦🟫⬜  (en marron): parmi ses 8 voisins,
+⬜⬜🟫⬜⬜       5 sont vivants
+⬜⬜⬜⬜🟫</code></pre>
+<h3 id="la-grille-du-jeu-de-la-vie">La grille du jeu de la vie</h3>
+<blockquote>
+<p>Une grille de carrés, soit morts soit vivant. Tout simplement</p>
+</blockquote>
+<h3 id="les-règles-du-jeu-de-la-vie">Les règles du jeu de la vie:</h3>
+<ul>
+<li>une cellule morte avec 3 voisins ⟶ une cellule nait</li>
+<li>une cellule vivante avec 2 ou 3 voisins ⟶ la cellule survit</li>
+<li>sinon ⟶ la cellule meurt (ou reste morte)</li>
+</ul>
+<p>Et c’est tout !</p>
+<p>Il suffit de répéter ces règles sur toutes les cellules, le tout pendant des milliers de générations.</p>
+<hr />
+<p>L’intérêt de cette page web est de pouvoir changer ces règles et voir ce qui se passe.</p>
+<p>Et on se rend vite compte que les règles choisies par Conway sont très simple, et pourtant créent des phénomènes passionants.</p>
+<p><br></p>
+<h3 id="quelques-règles-intéréssantes">Quelques règles intéréssantes</h3>
+<h4 id="notation-on-note-une-règle-bnaissancessurvie">Notation: on note une règle B<b style="color: red">[naissance]</b>/S<b style="color: blue">[survie]</b></h4>
+<p>Exemple: B<b style="color: red">3</b>/S<b style="color: blue">23</b> signifie que la cellule - quand elle est morte, nait seulement avec <b style="color: red">3</b> voisins vivants (la lettre B est pour <em>“birth”</em>) - quand elle est vivante, survie seulement avec <b style="color: blue">2</b> ou <b style="color: blue">3</b> voisins vivants (lettre S pour <em>“survive”</em>).</p>
+<pre><code>B3/S23 est donc la règle originale du jeu de la vie.</code></pre>
+<hr />
+<table>
+<thead>
+<tr class="header">
+<th>règle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>B</strong>0/ <strong>S</strong>8</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong>23/ <strong>S</strong>0</td>
+</tr>
+<tr class="odd">
+<td><strong>B</strong>0/ <strong>S</strong>56</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong>2/ <strong>S</strong>0</td>
+</tr>
+<tr class="odd">
+<td><strong>B</strong>3/ <strong>S</strong>1235</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong>3/ <strong>S</strong>012345678</td>
+</tr>
+<tr class="odd">
+<td><strong>B</strong>3/ <strong>S</strong>45678</td>
+</tr>
+<tr class="even">
+<td><strong>B</strong>25678/ <strong>S</strong>5678</td>
+</tr>
+</tbody>
+</table>
+<p>Essayez de tester la première règle. Cette règle s’appelle <strong>B</strong>0/ <strong>S</strong>8, c’est à dire qu’une cellule morte nait quand elle a 0 voisins vivants (quand elle est isolée), et une cellule vivante survit uniquement quand elle a 8 voisins.</p>
+<p>Donc il faut cocher les carrés suivants:</p>
+<p><img src="./demo.png" /></p>
+<p>Ensuite, cliquez simplement sur “tester la règle”</p>
+<hr />
+<h2 id="pour-aller-plus-loin">Pour aller plus loin:</h2>
+<p>Une vidéo qui présente le jeu de la vie:</p>
+<p><a href="https://www.youtube.com/watch?v=S-W0NX97DB0"><img src="https://img.youtube.com/vi/S-W0NX97DB0/0.jpg" /></a></p>
