@@ -3,10 +3,17 @@ Vous vous demandiez pourquoi le nombre 42 apparait partout, dans la pop-culture 
 > C’est normal: c’est la réponse à la grande question sur la vie, l’univers et le reste !
 
 
+<br><br>
+
+
 Plus sérieusement, ce concept a été créé par un l’auteur Douglas Adams dans le livre [Le guide du voyageur Galactique](https://fr.wikipedia.org/wiki/Le_Guide_du_voyageur_galactique)
+
+<br>
 
 Ce livre est l’histoire complètement déjantée d’un humain qui doit fuir la Terre car celle-ci va être détruite pour faire place à une déviation dans l’espace.
 Dans son périple, il visitera les coins les plus exotiques de l’univers, dont un restaurant juste avant la fin du monde, une fabrique de planètes de luxe, un vaisseau à générateur d’improbabilité infini, une autre version de la Terre, … Mais il  apprendra surtout l’existence de l’ordinateur  le plus intéligent de tous les temps.
+
+<br>
 
 Et quand on demanda la [réponse à la grande question](https://fr.wikipedia.org/wiki/La_grande_question_sur_la_vie,_l%27univers_et_le_reste) sur la vie, l’univers et le reste, il réfléchit pendant  7.5 millions d’années avant de répondre:
 
@@ -22,4 +29,4 @@ Certains mathématiciens aiment jouer l’avocat du diable et montrer toutes les
 
 Cet article en est un bon résumé:
 
-http://eljjdx.canalblog.com/archives/2010/10/10/19289645.html
+[http://eljjdx.canalblog.com/archives/2010/10/10/19289645.html](http://eljjdx.canalblog.com/archives/2010/10/10/19289645.html)
