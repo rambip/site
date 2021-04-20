@@ -4,9 +4,13 @@ Il a été inventé par [John Conway](https://fr.wikipedia.org/wiki/John_Horton_
 
 (On appel d’ailleurs le jeu de la vie `Conway’s Game of life` en anglais)
 
+<br>
+<br>
+
 Un automate cellulaire est un type de simualiton extremement simple. C’est presque un jeu informatique.
 
 Pour faire un automate cellulaire, il faut seulement:
+
 - Une grille de cellules
 - Des états à mettre dans cette grille
 - Une règle qui va déterminer comment chaque cellule va évoluer en fonction de ses voisins.
@@ -47,9 +51,9 @@ Il suffit de répéter ces règles sur toutes les cellules, le tout pendant des 
 
 ---
 
-L’intéret de cette page web est de pouvoir changer ces règles et voir ce qui se passe.
+L’intérêt de cette page web est de pouvoir changer ces règles et voir ce qui se passe.
 
-Et on se rend vite compte que les règles choisies par Conway est très simple, et pourtant crée des phénomènes passionants.
+Et on se rend vite compte que les règles choisies par Conway sont très simple, et pourtant créent des phénomènes passionants.
 
 <br>
 
