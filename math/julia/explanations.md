@@ -12,7 +12,7 @@ Ces nombres peuvent paraitre bizzare, mais comme tous les nombres, ont peut les 
 Pour construire un ensemble de Julia, c’est très simple:
 choisissez d’abord un nombre complexe C.
 
-Ensuite, regardez ce programme suivant :
+Ensuite, regardez le programme suivant :
 
 ```
   On part d’un nombre complexe.
