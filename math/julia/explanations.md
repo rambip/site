@@ -54,7 +54,7 @@ Maintenant, si vous cliquez sur une partie à l’extérieur de Mandelbrot, vous
 ### Explorer Mandelbrot:
 voici un site dans lequel vous pouvez explorer sans fin Mandelbrot pour en découvrir les merveilles:
 
-http://mandel.gart.nz/
+[http://mandel.gart.nz/](http://mandel.gart.nz)
 
 
 ## Pour aller plus loin

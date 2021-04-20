@@ -8,7 +8,7 @@ let freeH = document.documentElement.clientHeight-70;
 const size = Math.round(Math.max(Math.min(freeW, freeH/2), Math.min(freeW/2, freeH)))-15;
 
 // init canvas and draw utilities
-const j = document.getElementById("julia"); j.width = size; j.height=size;
+const j = document.getElementById("julia_canvas"); j.width = size; j.height=size;
 const julia_ctx= j.getContext('2d');
 julia_ctx.fillStyle = "white";
 julia_ctx.textAlign = "center";
@@ -18,7 +18,7 @@ julia_ctx.fillText("the Mandelbrot set", size/2, 180);
 julia_ctx.fillText("at different points", size/2, 210);
 
 
-const m = document.getElementById("mandel"); m.width = size; m.height = size;
+const m = document.getElementById("mandel_canvas"); m.width = size; m.height = size;
 const xminM = -1.7;
 const yminM = -1.2;
 const scaleM = 2.4;
