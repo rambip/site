@@ -11,14 +11,14 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let button = document.getElementById("button");
-let previous = document.getElementById("previous");
-let next = document.getElementById("next");
+let open_button = document.getElementById("open");
+let previous_button = document.getElementById("previous");
+let next_button = document.getElementById("next");
 let file_input = document.getElementById("file-input");
 let image;
 let canvas = document.getElementById("preview");
 let ctx = canvas.getContext("2d");
-let conv = document.getElementById("conv");
+let conv_button = document.getElementById("conv");
 let quality = document.getElementById("quality");
 let file_data = [];
 let Module;
@@ -42,10 +42,10 @@ function load_wasm() {
 }
 load_wasm();
 let current_image = 0;
-button.onclick = () => { file_input.click(); document.getElementById("selection").style.display = "none"; };
-previous.onclick = function () { current_image = (current_image - 1 + file_data.length) % file_data.length; request_test_image(); };
-next.onclick = function () { current_image = (current_image + 1 + file_data.length) % file_data.length; request_test_image(); };
-conv.onclick = convert_and_zip;
+open_button.onclick = () => { file_input.click(); document.getElementById("selection").style.display = "none"; };
+previous_button.onclick = function () { current_image = (current_image - 1 + file_data.length) % file_data.length; request_test_image(); };
+next_button.onclick = function () { current_image = (current_image + 1 + file_data.length) % file_data.length; request_test_image(); };
+conv_button.onclick = () => { conv_button.style.visibility = "hidden"; convert_and_zip(); };
 file_input.addEventListener('change', read_all_images);
 quality.onchange = () => request_test_image();
 function request_test_image() {
@@ -92,10 +92,10 @@ function read_all_images() {
             // everything is red
             if (file_data.length == file_input.files.length) {
                 console.log(file_data);
-                conv.style.visibility = "visible";
+                conv_button.style.visibility = "visible";
                 quality.style.visibility = "visible";
-                next.style.visibility = "visible";
-                previous.style.visibility = "visible";
+                next_button.style.visibility = "visible";
+                previous_button.style.visibility = "visible";
                 request_test_image();
             }
         });
