@@ -11,10 +11,6 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// TODO: 
-// - compile everything to a single js file with all the modules
-// (browserify ?, tsify ?)
-// - add an index.d.ts file with types
 let button = document.getElementById("button");
 let previous = document.getElementById("previous");
 let next = document.getElementById("next");
@@ -37,18 +33,10 @@ let Setter = {
         mem.set(data, ptr);
     },
 };
-// import/export fonctions ?
 function load_wasm() {
     return __awaiter(this, void 0, void 0, function* () {
-        //let memory = new WebAssembly.Memory({initial: 512, maximum:1000});
-        //new Uint8Array(memory.buffer).set([42, 42, 42], 0)
-        //console.log(memory);
-        //let imports = {env: {emscripten_notify_memory_growth: (_) => alert("memory ++")}, wasi_snapshot_preview1: {emscipten_notify_memory_growth: (_)=>alert("memory ++") }};
-        let imports = {};
-        let wasm = yield WebAssembly.instantiateStreaming(fetch('./converter.wasm'), imports);
-        console.log(wasm);
+        let wasm = yield WebAssembly.instantiateStreaming(fetch('./converter.wasm'), {});
         Module = wasm.instance.exports;
-        console.log(Module.memory.buffer);
         buffer = Module.memory.buffer;
     });
 }
@@ -116,19 +104,13 @@ function read_all_images() {
 }
 function convert_image(f) {
     let q = (quality.value) / 200.0;
-    console.log(`q = ${q}`);
-    console.log(new Uint8Array(buffer).slice(f.adress, f.adress + f.size));
-    // echec qd image trop grande ?
     let new_size = Module.convert_file(f.adress, f.size, f.compressed, q);
-    console.log(`new size: ${new_size}`);
-    console.log(Module.memory.buffer);
     return new File([new Uint8Array(buffer).slice(f.compressed, f.compressed + new_size)], f.name + ".jpg");
 }
 function convert_and_zip() {
     return __awaiter(this, void 0, void 0, function* () {
         let n_files = file_data.length;
         let image_files = [];
-        console.log(`there are ${n_files} files`);
         for (let i = 0; i < n_files; i++) {
             let f = file_data[i];
             let r = convert_image(f);
