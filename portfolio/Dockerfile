@@ -9,3 +9,6 @@ WORKDIR /cv
 
 ## clone repo and add patch
 RUN git clone https://github.com/rambip/Grape-Academic-Theme --depth 1 -b v2.2 /cv
+
+
+ENTRYPOINT ["/usr/gem/bin/jekyll"]
