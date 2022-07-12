@@ -31,7 +31,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: copy result to html
         run: |
-          mv _site html/portfolio
+          cp -r _site ./html/portfolio
 
        
       - name: Deploy 🚀
