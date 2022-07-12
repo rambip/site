@@ -4,3 +4,5 @@ description: 'generate my portfolio'
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args: 
+    - build
