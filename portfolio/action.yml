@@ -6,4 +6,3 @@ runs:
   image: 'Dockerfile'
   args: 
     - build
-  working-directory: portfolio
