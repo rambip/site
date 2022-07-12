@@ -1,4 +1,4 @@
-#/usr/bin/sh
+#!/usr/bin/sh
 
 # TODO: environment variable for location of folders
 
