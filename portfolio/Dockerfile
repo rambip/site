@@ -11,4 +11,7 @@ WORKDIR /cv
 RUN git clone https://github.com/rambip/Grape-Academic-Theme --depth 1 -b v2.2 /cv
 
 
-ENTRYPOINT ["/usr/gem/bin/jekyll"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
