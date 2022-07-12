@@ -1,0 +1,93 @@
+ vous avez eu le courage de jouer assez longtemps, vous avez pu voir qu’il y a plusieurs niveaux dans ce jeu (sinon, courage: il suffit d’avoir 10 points cumulés pour passer au niveau suivant)</p>
+ <p>Et dès le premier nouveau niveau, vous avez surement vu des choses étranges se passer: le <em>snake</em> peut traverser les murs ! Et quand on commence à coller les côtés entre eux, un carré peut devenir beaucoup plus intéréssant.</p>
+ <h3 id="vous-avez-dit-topologie">Vous avez dit topologie ?</h3>
+ <p>La <a href="https://fr.wikipedia.org/wiki/Topologie">topologie</a>, c’est le domaine des maths qui s’intéresse à la structure, à la forme des objets.</p>
+ <p>Par exemple, on peut se dire qu’entre une boule de pétanque et une boule de bowling, il n’y a pas grande différence, si on se dit que la taille n’est pas importante. Mais finalement, entre un ballon de basket et un ballon de rugby non plus: même si ils n’ont pas exactement la même géométrie, ils ont une forme similaire: il suffit d’applatir le ballon de basket pour avoir un ballon de rugby.</p>
+ <blockquote>
+ <p>On dit que le ballon de basket est <strong>homéomorphe</strong> au ballon de rugby</p>
+ </blockquote>
+ <p>Mais en topologie, on va beaucoup plus loin: par exemple, un carré est homéomorphe à un disque 😵</p>
+ <p>Imaginez une toile élastique incassable, qu’on peut seulement étirer et déformer à l’infini. On va mettre des couleurs sur cette toile pour voir ce qui se passe.</p>
+ <p>Voilà comment on peut passer du disque au carré.</p>
+ <p><img src="square_circle.png" /></p>
+ <p>On voit bien qu’entre les deux images, on a “cassé aucune ligne”</p>
+ <blockquote>
+ <p>En topologie, deux espaces sont homéomorphes si on peut passer de l’un à l’autre de façon continue, sans déchirure ni recollement.</p>
+ </blockquote>
+ <p>Donc, et utilisant le même principe, on peut dire qu’une tasse et une bouée, c’est à peu près la même chose:</p>
+ <p><img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Mug_and_Torus_morph.gif" /></p>
+ <p>Et pareil entre une vache et une sphère:</p>
+ <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Spot_the_cow.gif/300px-Spot_the_cow.gif" /></p>
+ <p><strong>Et quel rapport avec notre jeu ?</strong></p>
+ <p>C’est très simple: Les mathématiciens adorent classer des trucs, et les spécialistes de la topologie ont essayé de découvrir tous les espaces topologiques possibles en 2 dimensions. Et bonne nouvelle, on peut tous les créer en collant les bords d’un carré !!!</p>
+ <p>Alors prenons un carré très élastique, de la colle mathématique et c’est parti 😉</p>
+ <h4 id="le-ruban">1) le ruban</h4>
+ <p>On va commencer simple, en collant les deux côtés d’un carré entre eux.</p>
+ <p>En fait, cette idée existe dans plusieurs jeux d’arcade, comme par exemple:</p>
+ <p><img src="https://blogdemaths.files.wordpress.com/2014/04/pac-man_recollement_cylindre_figure.png?w=640&amp;h=265" /></p>
+ <p>Vous pouvez le faire sur une vraie feuille de papier et du ruban adhesif. Vous obtenez un cylindre, qu’on appelle d’avantage un ruban en topologie.</p>
+ <h4 id="le-tore">2) le tore</h4>
+ <p>Si vous regardez le ruban qu’on vient de créer, on a encore un problème: il y a un bord.</p>o
+
+ <p>Mais on peut encore procéder à un collage, et raccorder le bord du haut et celui du bas. Vous devinez quelle forme on obtient ? N’oubliez pas, vous avez le droit d’étirer la surface autant que vous voulez !</p>
+ <p><strong>Solution:</strong></p>
+ <p><img src="https://plus.maths.org/issue10/features/topology/gluetorus.gif" /></p>
+ <p>On obtient une bouée. En mathématiques, cette forme s’appelle un tore <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Torus.png" /></p>
+ <h4 id="la-sphère">3) la sphère</h4>
+ <p>Là, on commence les choses sérieuses.</p>
+ <p>Quand on a fait le premier collage de notre carré, on a choisi les deux côtés opposés. Mais on aurait pu faire autrement.</p>
+ <p>Un autre moyen de faire est de coller les côtés adjacents entre eux:</p>
+ <p><img src="fold1.png" /></p>
+ <p>Si vous essayez avec un carré de papier, vous obtenez un cone. Et un cone, quand on l’aplatit, ça donne … Un disque. Et un disque, c’est homéomorphe à un carré ! Donc pour l’instant, ce n’est pas très intéréssant.</p>
+ <p>Mais maintenant, on va coller les deux autres côtés ensembles. Cette fois, ce qui se passe est plus difficile à imaginer</p>
+ <ul>
+ <li><strong>0.</strong> On part d’un carré élastique.</li>
+ </ul>
+ <p><img src="square_sphere_1.png" /></p>
+ <ul>
+ <li><strong>1.</strong> on va déformer ce carré en l’étirant aux 2 coins opposés</li>
+ </ul>
+ <p><img src="square_sphere_2.png" /></p>
+ <ul>
+ <li><strong>2.</strong> On colle les côtés verts entre eux, et les côtés bleus entre eux</li>
+ </ul>
+ <p><img src="square_sphere_3.png" /></p>
+ <ul>
+ <li><strong>3.</strong> on obtient deux triangles collés entre eux sur les bords. Pensez à un chausson au pomme ou à une calzone, par exemple.</li>
+ </ul>
+ <p><img src="square_sphere_4.png" /></p>
+ <ul>
+ <li><strong>4.</strong> Il ne reste plus qu’à mettre notre chausson au four. Si il gonfle assez, il deviendra une sphère !</li>
+ </ul>
+ <p>Si vous avez suivi toutes les étapes, vous avez vu que j’ai beaucoup transformé mon carré, mais je n’ai fait aucun collage ou découpage à part coller les 4 côtés. Donc pour la topologie, pas de problème.</p>
+ <p><br></p>
+ <h4 id="le-ruban-de-moebius">4) le ruban de moebius</h4>
+ <p>Revenons à notre ruban. Si on essaie de le décrire, on s’aperçoit qu’il a: - 2 faces - 2 bords, 1 en haut et 1 en bas</p>
+ <p>Et si je vous disais qu’il était possible de faire avec du papier un objet avec <em>un seul bord</em> et <em>une seule face</em> … Essayez d’imaginer à quoi un tel objet pourrait ressembler.</p>
+ <p>Si vous n’y arrivez pas, prenez un papier, des ciseaux et de la colle.</p>
+ <ul>
+ <li><p>Découpez une bande de papier de quelques centimètres de large.</p></li>
+ <li><p>Collez les deux extrémités de la bande entre eux, mais <strong>en faisant un demi tour avant</strong></p></li>
+ </ul>
+ <p><img src="https://lmoussakova.files.wordpress.com/2012/05/rubanmoebiusstep4.jpg" /></p>
+ <p>Ce que vous obtenez s’appelle un ruban de moebius.</p>
+ <p><img src="https://touslesinsolites.files.wordpress.com/2012/04/mobius-4.png" width="50%"></p>
+ <p>Vous pouvez essayer de le colorier, en prenant une couleur par face. Vous pouvez aussi essayer de le découper dans le sens de la largeur.</p>
+ <p>Et pour un topologiste, c’est une façon tout à fait normale de recoller les bords d’un carré !</p>
+ <p><br></p>
+
+<h4 id="la-bouteille-de-klein">5) la bouteille de klein</h4>
+<p>Je vous laisse celui là en exercice:</p>
+<p>Essayez de coller les bords de ce carré de cette façon:</p>
+<p><img src="https://i.stack.imgur.com/2iFIg.png" /></p>
+<p><br> <br></p>
+<p>Normalement, vous tombez sur cet objet: La bouteille de Klein</p>
+<p><img src="https://qph.fs.quoracdn.net/main-qimg-4ee52642d3b35d5a4269c33ad4a88e74-c" /></p>
+<h4 id="le-plan-projectif-réel">6) le plan projectif réel</h4>
+<p>Si il vous reste encore des neurones, aller voir cette vidéo pour voir ce qui se passe quand on relie les côtés d’un carré deux à deux opposés, en leur faisant faire chacun un demi tour.</p>
+<p><a href="https://www.youtube.com/watch?v=lEvJqGvY24c"><img src="https://img.youtube.com/vi/lEvJqGvY24c/0.jpg" /></a></p>
+<p><br><br><br><br></p>
+<h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p>La topologie est un domaine des maths très vaste, et je n’ai fait qu’éfleurer les concepts qui existent. On a fait la liste de toutes les variétés en 2 dimensions, mais on peut faire la même chose avec la 3D et toutes les autres dimensions, et on a même pas parlé de connexité.</p>
+<p>Si vous voulez creuser un peu plus, vous pouvez aller voir cette vidéo:</p>
+<p><a href="https://www.youtube.com/watch?v=ayjck76iSOA"><img src="https://img.youtube.com/vi/ayjck76iSOA/0.jpg" /></a></p>

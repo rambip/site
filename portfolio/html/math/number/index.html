@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css?1500">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+	<title>meilleurs nombres</title>
+</head>
+<body>
+    <div class="doc">
+        <button class="info" style="display: none;"></button>
+        <div class="explanation"><!--#include virtual="explanations.html" --></div>
+    </div>
+    <a href="../" class="back"></a>
+    <div style="width: 100%; margin: 0 auto; text-align: center">
+        <button style="margin: 20px" onclick="document.getElementById('result').innerText = 42; document.getElementsByClassName('info')[0].style.display = 'block'">cliquez pour générer un nombre génial</button>
+        <p style="font-size: 150px;" id="result"></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+	<title id="title">Liens</title>
+    <link rel="stylesheet" href="/style.css?1500">
+    <style>
+        a.float {
+            color: white;
+            position: absolute;
+            border: 2px solid #925aac;
+            border-radius: 5px;
+            padding: 2px 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="../" class="back"></a>
+    <div id="links" style="width: 100%; height: 80vh;">
+    </div>
+    <canvas id="canvas" style="top: 0;position: absolute; z-index: -5;"></canvas>
+    <script type="module">
+        import init from './collisions.js';
+        import {QuadTree, Rect} from './collisions.js';
+
+        let box = document.getElementById("links");
+
+        let width = Math.min(screen.width, window.innerWidth);
+        let height = Math.min(screen.height, window.innerHeight);
+
+        let canvas = document.getElementById("canvas");
+        canvas.height = height;
+        canvas.width = width;
+
+        let ctx = canvas.getContext("2d");
+        let objects, q_tree;
+
+        class Move_link {
+            constructor(name, adress){
+                let link = document.createElement("a");
+                link.innerHTML = name;
+                link.href = "http://" +  adress;
+                link.className = "float";
+                link.target = "_blanck";
+                link.onmouseover = (e => {this.vx = 0; this.vy = 0});
+                link.onmouseout = (e => {let angle = Math.random()*6.28;
+                    this.vx = Math.sin(angle)*(Math.random()+2);
+                    this.vy = Math.cos(angle)*(Math.random()+2);})
+
+                link.onclick = (e => this.link.style.color = "plum");
+
+                box.appendChild(link);
+                this.w = link.getBoundingClientRect().width;
+                this.h = link.getBoundingClientRect().height;
+
+                this.link = link;
+
+                let angle = Math.random()*6.28;
+                this.vx = Math.sin(angle)*(Math.random()+1);
+                this.vy = Math.cos(angle)*(Math.random()+1);
+                this.x = Math.random()*(width-this.w-5);
+                this.y = Math.random()*(height-this.h-5);
+            }
+
+            move(){
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x + this.w > width || this.x < 0) {this.vx = -this.vx};
+                if (this.y + this.h > height || this.y < 0) {this.vy = -this.vy};
+                this.link.style.left = Math.round(this.x).toString() + "px";
+                this.link.style.top = Math.round(this.y).toString() + "px";
+            }
+
+            get_rect(){
+                return new Rect(this.x, this.y, this.w, this.h);
+            }
+
+        }
+
+        objects = [
+            new Move_link("du code", "repl.it"),
+            new Move_link("des neuronnes", "playground.tensorflow.org"),
+            new Move_link("ennui", "theuselessweb.com/"),
+            new Move_link("joli texte", "hackmd.io/"),
+            new Move_link("perdu", "www.perdu.com/"),
+            new Move_link("problèmes", "prologin.org"),
+            new Move_link("réfléchir", "brilliant.org"),
+            new Move_link("pariez", "www.metaculus.com/questions/"),
+            new Move_link("observer youtube", "algotransparency.org/?date=21-11-2020"),
+            new Move_link("blabla", "lepipotron.com/"),
+            new Move_link("dictionnaire", "rosettacode.org/wiki/Fast_Fourier_transform"),
+            new Move_link("symboles", "www.asciiart.eu/"),
+            new Move_link("machine", "sebastianlyserena.dk/"),
+            new Move_link("planete rouge", "www.covidvisualizer.com/"),
+            new Move_link("planete verte", "www.ecosia.org"),
+            new Move_link("mieux taper", "bepo.fr/wiki/Accueil"),
+        ]
+
+        function update(){
+            q_tree.clear();
+            for (let i = 0; i < objects.length; i++) {
+                let o = objects[i];
+                o.link.style.background = "";
+
+                o.count = 0;
+                q_tree.insert(o.x+o.w/2, o.y+o.h/2, i);
+            }
+
+            ctx.clearRect(0, 0, width, height);
+            ctx.beginPath();
+            ctx.strokeStyle = "#ffffff0f";
+
+            q_tree.draw(ctx);
+
+            for (let i = 0; i < objects.length; i++) {
+                let o = objects[i];
+                let near = q_tree.find_in_range(o.x-o.w, o.y-o.h, o.w*2, o.h*2);
+                for (let i2 = 0; i2 < near.length; i2++) {
+                    let other_id = near[i2];
+
+                    if (other_id != i && objects[other_id].get_rect().intersect_rect(o.x, o.y, o.w, o.h)){
+                        objects[other_id].link.style.background = "red";
+                        o.link.style.background = "red";
+                    }
+                }
+                o.move();
+            }            
+        }
+        init().then(wasm =>{q_tree = new QuadTree(width, height); setInterval(update, 70)});
+    </script>
+</body>
+</html>
+

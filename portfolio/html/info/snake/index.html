@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/style.css?1500">
+    <title>Snake</title>
+    <style>
+        div {
+            text-align: center;
+            font-size: lbarge;
+        }
+    </style>
+</head>
+<blocs>
+    <div class="doc">
+        <button class="info"></button>
+        <div class="explanation"><!--#include file="explanations.html"--></div>
+    </div>
+    <a href="../" class="back"></a>
+    <h2 style="width: 100%; text-align: center;">Topological Snake</h2>
+    <div id="level">&InvisibleComma;</div>
+    <div class="h-box adapt">
+        <button id="previous" style="margin: auto; margin-right: 10px; font-size: large; visibility: hidden;" onclick="Game.level=Math.max(0, Game.level-1); reset()">⬅</button>
+        <p id="game" style="width: min-content; font-size: 3vmin;"></p>
+        <button id="next" style="margin: auto; margin-left: 10px; font-size: large; visibility: hidden;" onclick="Game.level = Math.min(Game.level+1, levels.length-1); reset()">➡</button>
+    </div>
+    <div id="message">Utilise les flèches de ton clavier pour jouer (appuie pour continuer)</div>
+    <script>
+        let SIZE = 17;
+        let M = SIZE-1;
+        let game = document.getElementById("game");
+        let message_box = document.getElementById("message");
+        let level_box = document.getElementById("level");
+        
+        let buffer = new Uint8Array(SIZE * SIZE);
+        let Chars = {
+            char_array: ['⬛', '⬜', '🟪', '🟦', '🟥', '🟢', '🟠'],
+            background: 0,
+            body: {false: 1, true: 2},
+            head: {false: 3, true: 4},
+            bonus: {false: 5, true: 6},
+        }
+
+        let Game = {
+            game_over: true,
+            waiting: false,
+            last_game_over: -1,
+            level: 0,
+            unlocked: 0,
+            score: 0,
+            total_score: 0,
+        }
+
+        let Snake, Bonus;
+
+        let levels = [
+            {
+                title: "carré",
+                f: ((x, y) => { // square
+                if (x >= SIZE || x < 0 || y >= SIZE|| y < 0){return null}
+                else {return {x: x, y:y}}}),
+            border: ["#e91868", "#e91868", "#e91868", "#e91868"]},
+
+            {
+                title: "ruban",
+                f: ((x, y) => { // ruban
+                if (y >= SIZE|| y < 0){return null}
+                else {return {x: (x+SIZE)%SIZE, y:y}}}),
+            border: ["", "#e91868", "", "#e91868"]},
+
+            {
+                title: "tore",
+                f: ((x, y) => { // torus
+                return {x: (x+SIZE)%SIZE, y:(y+SIZE)%SIZE}}),
+            border: ["", "cyan", "", "cyan"]},
+
+            {
+                title: "sphère",
+                f: ((x, y) => { // moebius
+                if      (y >= SIZE){return {x: M,  y:x, dir: 1}}
+                else if (x >= SIZE){return {x: y,y:M, dir: -1}}
+                else if (  y < 0  ){return {x: 0,       y: x, dir: 1}}
+                else if (  x < 0  ){return {x: y,       y:0, dir: -1}}
+                else {return {x: x, y: y}}}),
+            border: ["blue", "cyan", "pink", "purple"]},
+
+            {
+                title: "ruban de moebius",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0){return null}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "#e91868", "cyan", "#e91868"]},
+
+            {
+                title: "bouteille de klein",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0){return {x: x, y:(y+SIZE)%SIZE}}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "", "cyan", ""]},
+
+            {
+                title: "plan projectif réel",
+                parity: true,
+                f: ((x, y) => { // moebius
+                if (y >= SIZE|| y < 0)      {return {x: M-x, y:(y+SIZE)%SIZE, p: true}}
+                else if (x >= SIZE || x < 0){return {x: (x+SIZE)%SIZE, y:(M-y), p: true}}
+                else {return {x: x, y:y}}}),
+            border: ["blue", "pink", "cyan", "purple"]},
+        ]
+
+        function reset(){
+            Snake = {dir: 2, px: 5, py: 5, blocs: [{x: 4, y: 5, p:false}, {x: 5, y: 5, p:false}], p: false, dir: 2}
+            Bonus = {x: Math.floor(SIZE/2), y: Math.floor(SIZE/2), p: false,}
+            
+            Game.game_over = false;
+            Game.waiting = true;
+            Snake.dir = 2;
+
+            Game.score = 0;
+            
+            document.body.style.background = "";
+
+            game.style.border = "2px solid";
+            
+            game.style.borderRightColor = levels[Game.level].border[0];
+            game.style.borderBottomColor= levels[Game.level].border[1];
+            game.style.borderLeftColor  = levels[Game.level].border[2];
+            game.style.borderTopColor   = levels[Game.level].border[3];
+
+            message_box.style.color = "white";
+            message_box.innerText = "Appuie sur une touche pour commencer";
+
+            level_box.innerText = "NIVEAU " + Game.level.toString() + " : " + levels[Game.level].title;
+
+            document.getElementById("previous").style.visibility = Game.level==0 ? 'hidden' : 'visible';
+            document.getElementById("next").style.visibility = Game.level==Game.unlocked ? 'hidden' : 'visible';
+
+            move();
+            display();
+        }
+
+        function move(){
+            // move head
+            Snake.blocs = [{x : Snake.px, y: Snake.py, p: Snake.p}].concat(Snake.blocs);
+
+            px = Snake.px + [-1, 0, 1, 0][Snake.dir];
+            py = Snake.py + [0, -1, 0, 1][Snake.dir];
+
+            let result = levels[Game.level].f(px, py);
+            if (result) {
+                px = result.x; py = result.y
+                if (result.p){Snake.p = !Snake.p}
+                if (result.dir){Snake.dir = (Snake.dir+result.dir+4)%4}
+            }
+            else {return true;}
+
+            // collision entre la tête et le corps
+            if (Snake.blocs.some(b => b.x==px && b.y==py)){return true};
+
+            if (px == Bonus.x && py == Bonus.y && Snake.p == Bonus.p){
+                // level up
+            while (Snake.blocs.some(b => b.x==Bonus.x && b.y == Bonus.y && Bonus.p == b.p) || px == Bonus.x && py == Bonus.y){
+                    Bonus.x = Math.floor(Math.random()*SIZE);
+                    Bonus.y = Math.floor(Math.random()*SIZE);
+                }
+                if (levels[Game.level].parity) {Bonus.p = Math.random()>0.5;}
+                Game.score ++;
+                message_box.innerText = "score : " + Game.score.toString();
+            } // on raccourci le corps du serpent si il n’a pas le bonus
+            else {Snake.blocs.pop()}
+            
+            Snake.px = px;
+            Snake.py = py;
+
+            // affichage
+            buffer.fill(Chars.background);
+
+            buffer[Snake.py*SIZE + Snake.px] = Chars.head[Snake.p];
+            Snake.blocs.forEach(b => {buffer[b.y*SIZE + b.x] = Chars.body[b.p]});
+            buffer[Bonus.y*SIZE + Bonus.x] = Chars.bonus[Bonus.p];
+
+            return false;
+        }
+
+        function display(){
+            let text = "";
+            for (let iy = 0; iy < SIZE; iy++) {
+                for (let ix = 0; ix < SIZE; ix++) {
+                    let n = buffer[iy*SIZE + ix];
+                    text += Chars.char_array[n];
+                }
+                text += '\n';
+            }
+            game.innerText = text;
+        }
+
+        window.onkeydown = function(e) {
+            if (Game.waiting) {Game.waiting=false; message_box.innerText=""}
+            else if (Game.game_over && Date.now() - Game.last_game_over > 300) {reset();}
+            if (e.keyCode >= 37 && e.keyCode <= 41){
+                let key = e.keyCode-37;
+                if (Math.abs(Snake.dir - key)%2==1) {
+                    Snake.dir = key
+                }
+            }
+        }
+
+        function game_loop(){
+            if (!(Game.game_over || Game.waiting)){
+                if (move()){
+                    // game over
+                    Game.game_over = true;
+                    Game.last_game_over = Date.now();
+                    message_box.style.color = "red";
+
+                    Game.total_score += Game.score;
+                    if (Game.total_score>7 && Game.unlocked<levels.length-1){Game.unlocked++; Game.total_score=0; document.getElementById("next").style.visibility="visible"};
+                    message_box.innerText = "PERDU ! (score : " + Game.score.toString() + ")\n\n Clique sur une touche pour recommencer";
+                };
+                display();
+            }
+        }
+        display();
+        setInterval(game_loop, 150);
+    </script>
+</blocs>
+</html>
