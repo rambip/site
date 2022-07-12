@@ -1,0 +1,8 @@
+# action.yml
+name: 'custom jekyll build'
+description: 'generate my portfolio'
+inputs:
+outputs:
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
