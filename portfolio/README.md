@@ -6,4 +6,5 @@ https://docs.github.com/en/actions/learn-github-actions/expressions
 
 
 TODO:
-github variables (in/out) for input dir and output dir
+- github variables (in/out) for input dir and output dir
+- rename cv to portfolio
