@@ -26,7 +26,7 @@ jobs:
       - uses: snickerbockers/submodules-init@v4
 
       # custom jekyll build
-      #- uses: TODO
+      - uses: ./portfolio
 
       # Runs a set of commands using the runners shell
       - name: copy result to html
