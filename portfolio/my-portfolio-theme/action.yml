@@ -1,0 +1,15 @@
+# action.yml
+name: 'custom jekyll build'
+description: 'generate my portfolio'
+inputs:
+  destination:
+    description: 'path of your content to create portfolio'
+    required: false
+    default: '.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - "build"
+    - "-d"
+    - /github/workflows/${{inputs.destination}}
