@@ -18,4 +18,4 @@ runs:
   args:
     - "build"
     - "-d"
-    - /github/workspaces/${{inputs.destination}}
+    - /github/workspace/${{inputs.destination}}
