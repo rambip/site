@@ -9,5 +9,5 @@ mkdir /srv/jekyll/_site
 ln -s /cv/_site /srv/jekyll/_site
 
 cd /cv
-ls -la 
+ls -la /srv/jekyll
 /usr/gem/bin/jekyll $@
