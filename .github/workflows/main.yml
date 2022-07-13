@@ -26,10 +26,10 @@ jobs:
         #- uses: snickerbockers/submodules-init@v4
 
       # custom jekyll build
-      - uses: portfolio/my-portfolio-theme/
-        working-directory: portfolio
+      - uses: /portfolio/my-portfolio-theme/
+        working-directory: /portfolio
         with:
-          destination: ./html/portfolio
+          destination: /html/portfolio
 
 
   deploy:
