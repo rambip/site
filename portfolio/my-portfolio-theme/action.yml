@@ -15,7 +15,6 @@ runs:
   image: 'Dockerfile'
   env:
     SOURCE_DIR: /github/workspace/${{inputs.source}}
-    DEST_DIR: /github/workspace/${{inputs.destination}}
   args:
     - "build"
     - "-d"
