@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build_portfolio:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -23,20 +23,26 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - uses: snickerbockers/submodules-init@v4
+        #- uses: snickerbockers/submodules-init@v4
 
       # custom jekyll build
-      - uses: ./portfolio/my-portfolio-theme/
+      - uses: portfolio/my-portfolio-theme/
+        working-directory: portfolio
         with:
           destination: ./html/portfolio
 
-      # Runs a set of commands using the runners shell
-      - name: copy result to html
-        run: |
-          cp -r _site ./html/portfolio
 
-       
+  deploy:
+    needs: build_portfolio
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: html # The folder the action should deploy.
+
