@@ -1,6 +1,7 @@
-{pkgs ? import <nixpkgs> {}}:
+{pkgs ? import <nixpkgs> {}, julia}:
 let
     portfolio = pkgs.callPackage ./portfolio/default.nix {};
+    julia =    
 
 in
 pkgs.stdenv.mkDerivation {
