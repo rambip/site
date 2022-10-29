@@ -1,9 +1,9 @@
-{ pkgs ? import <nixpkgs> {  } }:
+{ stdenv, rubyPackages, jekyll }:
 
-pkgs.stdenv.mkDerivation {
+stdenv.mkDerivation {
     name = "my portfolio";
     buildInputs = [
-        pkgs.rubyPackages.jekyll-paginate
+        rubyPackages.jekyll-paginate
       
     ];
     unpackPhase = ''
@@ -15,7 +15,7 @@ pkgs.stdenv.mkDerivation {
     cp -r ${./img} ./assets/img
     '';
     buildPhase = ''
-    ${pkgs.jekyll}/bin/jekyll build
+    ${jekyll}/bin/jekyll build
     '';
     installPhase = ''
     cp -r ./_site $out
