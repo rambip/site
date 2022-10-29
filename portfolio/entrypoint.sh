@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/nix/store/9zm6br2ri10a0b71dll2wrim5bnhg6b6-bash-5.1-p16/bin/sh
 
 test -z "$SOURCE_DIR" && SOURCE_DIR=/srv/jekyll
 
