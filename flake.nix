@@ -11,7 +11,7 @@
   with utils.lib; eachSystem allSystems (
     system:
         with import nixpkgs {inherit system;};
-        { packages.default = callPackage ./default.nix {
+        { packages.default = callPackage ./website.nix {
             julia=callPackage julia-source {};
         }; }
   );
