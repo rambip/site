@@ -6,16 +6,19 @@
       julia-source.flake = false;
       perfect-clear-source.url = "github:rambip/web-perfect-clear";
       perfect-clear-source.flake = false;
+      web-compress-source.url = "github:rambip/web-compress";
+      web-compress-source.flake = false;
       utils.url   = github:numtide/flake-utils;
   };
 
-  outputs = { self, nixpkgs, julia-source, perfect-clear-source, utils }: 
+  outputs = { self, nixpkgs, julia-source, perfect-clear-source, web-compress-source, utils }: 
   with utils.lib; eachSystem allSystems (
     system:
         with import nixpkgs {inherit system;};
         { packages.default = callPackage ./website.nix {
             julia = callPackage julia-source {};
             perfect-clear = callPackage perfect-clear-source {};
+            web-compress = callPackage web-compress-source {};
         }; }
   );
 }

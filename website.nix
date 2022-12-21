@@ -1,8 +1,9 @@
-{pkgs ? import <nixpkgs> {}, julia, perfect-clear}:
+{pkgs ? import <nixpkgs> {}, julia, perfect-clear, web-compress}:
 let
     portfolio = pkgs.callPackage ./portfolio/default.nix {};
     maths = pkgs.callPackage ./maths/default.nix {inherit julia;};
     info = pkgs.callPackage ./info/default.nix {inherit perfect-clear;};
+    tools = pkgs.callPackage ./tools/default.nix {inherit web-compress;};
     #art = pkgs.callPackage ./art/default.nix {};
     #links = pkgs.callPackage ./links/default.nix {};
 
@@ -15,11 +16,11 @@ let
     cp -r ./about_me/ $out/about_me
     cp -r ./art/ $out/art
     cp -r ./links/ $out/links
-    cp -r ./tools/ $out/tools
 
     cp -r ${portfolio} $out/portfolio
     cp -r ${info} $out/info
     cp -r ${maths} $out/maths
+    cp -r ${tools} $out/tools
     '';
 in
 derivation {

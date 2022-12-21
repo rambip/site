@@ -18,11 +18,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1667110639,
-        "narHash": "sha256-4FbPESZ5LbqQxkJJJBAfk/zKgF9h/4kyUwjjpJwYlbc=",
+        "lastModified": 1671458120,
+        "narHash": "sha256-2+k/OONN4OF21TeoNjKB5sXVZv6Zvm/uEyQIW9OYCg8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f38a1f04d1bec1feb61fd101a0539ae2002a7087",
+        "rev": "e37ef84b478fa8da0ced96522adfd956fde9047a",
         "type": "github"
       },
       "original": {
@@ -33,11 +33,11 @@
     "perfect-clear-source": {
       "flake": false,
       "locked": {
-        "lastModified": 1667322064,
-        "narHash": "sha256-+Euvy6c/hsNFzBMsJGbFeqK/oVdenKP6GxtTDJgaapI=",
+        "lastModified": 1671644044,
+        "narHash": "sha256-G8ZQzYN0y8rJf4FJOCbTyYMWENBoksIIjLCtAlzaSxU=",
         "owner": "rambip",
         "repo": "web-perfect-clear",
-        "rev": "8f42e3ce301988ccf4ef898658a97aa5dff2d694",
+        "rev": "da74b1608bb94bcae4c68219e7b76f52cb5590fa",
         "type": "github"
       },
       "original": {
@@ -51,21 +51,38 @@
         "julia-source": "julia-source",
         "nixpkgs": "nixpkgs",
         "perfect-clear-source": "perfect-clear-source",
-        "utils": "utils"
+        "utils": "utils",
+        "web-compress-source": "web-compress-source"
       }
     },
     "utils": {
       "locked": {
-        "lastModified": 1667077288,
-        "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "web-compress-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667124736,
+        "narHash": "sha256-BTGlkRb0GfHTqQHhRgDGyfGXD+xw+NuOynG1W3KxiL0=",
+        "owner": "rambip",
+        "repo": "web-compress",
+        "rev": "5be2ea073010a1159a4cf498bd30db1d6a469414",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rambip",
+        "repo": "web-compress",
         "type": "github"
       }
     }
