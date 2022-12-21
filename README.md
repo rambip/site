@@ -1,5 +1,7 @@
 # site
 
-repository for my website, hosted on a raspberrypi
+repository for my website
 
-https://rambip.github.com/
+it heavely uses nix, to gather all my projects at the same place.
+
+https://rambip.github.io/
