@@ -11,7 +11,7 @@ function setup() {
   crowd = []
 
   for (let i=0; i<n; i++){
-    crowd.push(new People(w/2, h/2, r_angle(),4))
+    crowd.push(new Dot(w/2, h/2, r_angle(),4))
   }
 
   function tell(e, i){
@@ -34,7 +34,7 @@ function average_angle(a, b){
   return atan2(cos(a)+cos(b)/3, sin(a)+sin(b)/3)
 }
 
-class People{
+class Dot{
   constructor(x, y, vAngle, speed){
     this.x = x
     this.y = y
@@ -65,13 +65,11 @@ class People{
 
       if (this.x > w-wbord || this.x < wbord){
         this.vx *= -1
-        this.x += this.vx
         return
       }
 
       if (this.y > h-hbord || this.y < hbord){
         this.vy *= -1
-        this.y += this.vy
         return
       }
     }
