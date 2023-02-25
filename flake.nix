@@ -3,11 +3,8 @@
 
   inputs = {
       julia-source.url = "github:rambip/web-julia";
-      julia-source.flake = false;
       perfect-clear-source.url = "github:rambip/web-perfect-clear";
-      perfect-clear-source.flake = false;
       web-compress-source.url = "github:rambip/web-compress";
-      web-compress-source.flake = false;
       utils.url   = github:numtide/flake-utils;
   };
 
@@ -16,9 +13,9 @@
     system:
         with import nixpkgs {inherit system;};
         { packages.default = callPackage ./website.nix {
-            julia = callPackage julia-source {};
-            perfect-clear = callPackage perfect-clear-source {};
-            web-compress = callPackage web-compress-source {};
+            julia = julia-source.defaultPackage."${system}";
+            perfect-clear = perfect-clear-source.defaultPackage."${system}";
+            web-compress = web-compress-source.defaultPackage."${system}";
         }; }
   );
 }
